@@ -9,69 +9,69 @@ import java.util.List;
  */
 public class SistemaCalificaciones {
 
-    private static List<Grupos> g = new ArrayList<Grupos>();
+    private static List<Grupos> ListaGrupos = new ArrayList<Grupos>();
     private static int k = 0;
 
     public static Grupos crearGrupo(String n, String s, String i, String m, String d, int e) {
         Profesor p = new Profesor(i, m, d, e);
         Grupos g1 = new Grupos(n, s, p);
-        g.add(g1);
+        ListaGrupos.add(g1);
         k = k + 1;
         return g1;
     }
 
     public static void add(Grupos x) {
-        g.add(x);
+        ListaGrupos.add(x);
     }
 
     public static List<Grupos> obtenerGrupos() {
-        return g;
+        return ListaGrupos;
     }
 
     public static int totalAlumnos() {
-        int t = 0;
-        for (int i = 0; i < g.size(); i++) {
-            t = t + g.get(i).getAlumnos().size();
+        int total = 0;
+        for (int i = 0; i < ListaGrupos.size(); i++) {
+            total = total + ListaGrupos.get(i).getAlumnos().size();
         }
-        return t;
+        return total;
     }
 
     public static int totalAprobados() {
-        int t = 0;
-        for (int i = 0; i < g.size(); i++) {
-            t = t + g.get(i).obtenerAprobados().size();
+        int total = 0;
+        for (int i = 0; i < ListaGrupos.size(); i++) {
+            total = total + ListaGrupos.get(i).obtenerAprobados().size();
         }
-        return t;
+        return total;
     }
 
     public static int totalReprobados() {
-        int t = 0;
-        for (int i = 0; i < g.size(); i++) {
-            t = t + g.get(i).obtenerReprobados().size();
+        int total = 0;
+        for (int i = 0; i < ListaGrupos.size(); i++) {
+            total = total + ListaGrupos.get(i).obtenerReprobados().size();
         }
-        return t;
+        return total;
     }
 
     public static double promedioGeneral() {
-        double s = 0;
-        int c = 0;
-        for (int i = 0; i < g.size(); i++) {
-            for (int j = 0; j < g.get(i).getAlumnos().size(); j++) {
-                Double v = g.get(i).getNotas().get(g.get(i).getAlumnos().get(j).getCarnet());
+        double TotalCalificaciones = 0;
+        int AlumnosTotales = 0;
+        for (int i = 0; i < ListaGrupos.size(); i++) {
+            for (int j = 0; j < ListaGrupos.get(i).getAlumnos().size(); j++) {
+                Double v = ListaGrupos.get(i).getNotas().get(ListaGrupos.get(i).getAlumnos().get(j).getCarnet());
                 if (v != null) {
-                    s = s + v.doubleValue();
-                    c = c + 1;
+                    TotalCalificaciones = TotalCalificaciones + v.doubleValue();
+                    AlumnosTotales = AlumnosTotales + 1;
                 }
             }
         }
-        if (c == 0) {
+        if (AlumnosTotales == 0) {
             return 0;
         }
-        return s / c;
+        return TotalCalificaciones / AlumnosTotales;
     }
 
     public static void limpiar() {
-        g.clear();
+        ListaGrupos.clear();
         k = 0;
     }
 }
